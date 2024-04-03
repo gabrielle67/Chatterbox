@@ -87,6 +87,8 @@ app.post('/login', async (req, res) => {
                 });
             });
         }
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
 });
 
@@ -111,10 +113,14 @@ app.post('/signup', async (req,res) => {
         });
       });
     } catch(err) {
+      if (err.code === 11000 && err.keyPattern.username) {
+        // MongoDB duplicate key error (username already exists)
+        res.status(400).json({ error: 'Username already exists' });
+    } else {
       if (err) throw err;
       res.status(500).json('error');
     }
-  });
+  }});
 
 const server = app.listen(4000);
 

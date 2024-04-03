@@ -6,16 +6,24 @@ export const UserContext = createContext({});
 export function UserContextProvider({children}) {
   const [username, setUsername] = useState(null);
   const [id, setId] = useState(null);
-  useEffect(() => {
-    axios.get('/profile').then(response => {
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/profile');
       setId(response.data.userId);
       setUsername(response.data.username);
-      console.log(response.data.user)
-    });
-  }, []);
-  return (
-    <UserContext.Provider value={{username, setUsername, id, setId}}>
-      {children}
-    </UserContext.Provider>
-  );
+    } catch (error) {
+      console.log('not logged in yet', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+return (
+  <UserContext.Provider value={{ username, setUsername, id, setId }}>
+    {children}
+  </UserContext.Provider>
+);
 }
