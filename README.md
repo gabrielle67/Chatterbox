@@ -1,5 +1,5 @@
 
-# Chatterbox 
+# ChatterBox 
 
 A simple Full Stack Chatting App using Websocket for real time communication and MongoDB to handle authentication and message retrieval.
 
