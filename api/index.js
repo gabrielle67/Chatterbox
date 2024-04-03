@@ -73,7 +73,7 @@ app.get('/users', async (req, res) => {
   res.json(users);
 });
 
-// log in current users -- search for username and ensure pass is correct
+// log in current user -- search for username and ensure pass is correct
 app.post('/login', async (req, res) => {
     const {username, password} = req.body;
     const foundUser = await User.findOne({username});
@@ -88,7 +88,12 @@ app.post('/login', async (req, res) => {
             });
         }
     }
-})
+});
+
+// log out current user by removing cookies
+app.post('/logout', (req, res) => {
+  res.cookie('token', '', {sameSite:'none', secure:true}).json('ok');
+});
 
 // sign in new users -- add new username and pass
 app.post('/signup', async (req,res) => {
@@ -113,9 +118,11 @@ app.post('/signup', async (req,res) => {
 
 const server = app.listen(4000);
 
-// create websocket server for displaying contacts and message handling
+// create websocket server
 const wss = new ws.WebSocketServer({server});
 wss.on('connection', (connection, req) => {
+
+  // handle old connections
   function notifyAboutOnlineUsers() {
     [...wss.clients].forEach(client => {
       client.send(JSON.stringify({
@@ -140,6 +147,7 @@ wss.on('connection', (connection, req) => {
     clearTimeout(connection.deathTimer);
   });
 
+  // handle users
   const cookies = req.headers.cookie;
   if (cookies) {
       const tokenString = cookies.split(';').find(str => str.startsWith('token='));
@@ -156,6 +164,7 @@ wss.on('connection', (connection, req) => {
       }
   }
   
+  // handle messages
   connection.on('message', async (message) => {
     const messageData = JSON.parse(message.toString());
     const {recipient, text} = messageData;
