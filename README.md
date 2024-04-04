@@ -1,7 +1,7 @@
 
 # ChatterBox 
 
-A simple Full Stack Chatting App using Websocket for real time communication and MongoDB to handle authentication and message retrieval.
+A simple Full Stack Chatting App using Websocket for real time communication and MongoDB to handle authentication and message retrieval
 
 ## Tech Stack
 
@@ -10,6 +10,8 @@ A simple Full Stack Chatting App using Websocket for real time communication and
 **Server:** NodeJS, ExpressJS
 
 **Storage:** MongoDB
+
+**Other Tools & Technologies:** Tailwind, Vercel
 
 
 
@@ -72,3 +74,11 @@ To run this project, you will need to add the following environment variables to
 | `/login`          | POST   | Logs in a user by verifying the provided credentials (username and password). | `{ username, password }`              | User ID / Error status     |
 | `/logout`         | POST   | Logs out the current user by removing the token cookie. | N/A                                    | `'ok'`                      |
 | `/signup`         | POST   | Registers a new user with the provided username and password. | `{ username, password }`              | User ID / Error status     |
+
+## Future Goals 
+
+*Group Chat capability
+
+*More stylized UI
+
+*Add fun statistics
