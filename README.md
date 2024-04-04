@@ -1,7 +1,7 @@
 
 # ChatterBox 
 
-A simple Full Stack Chatting App using Websocket for real time communication and MongoDB to handle authentication and message retrieval
+A Full Stack Chatting App using Websocket for real time communication and MongoDB to handle sign in and message retrieval
 
 ## Tech Stack
 
@@ -77,8 +77,6 @@ To run this project, you will need to add the following environment variables to
 
 ## Future Goals 
 
-*Group Chat capability
-
-*More stylized UI
-
-*Add fun statistics
+* Friending Capability
+* Group Chat capability
+* More stylized UI
