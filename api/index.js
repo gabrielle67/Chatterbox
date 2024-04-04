@@ -39,12 +39,12 @@ async function getUserData(req, res){
 }
 
 // ensure server is running
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
     res.json('ok')
 });
 
 // retrieve all previous messages between two users
-app.get('/messages/:userId', async (req, res) => {
+app.get('/api/messages/:userId', async (req, res) => {
   const {userId} = req.params;
   const userData = await getUserData(req);
   const selfId = userData.userId;
@@ -56,7 +56,7 @@ app.get('/messages/:userId', async (req, res) => {
 });
 
 // Retrieve total messages sent by a user
-// app.get('/messages/total/:userId', async (req, res) => {
+// app.get('/api/messages/total/:userId', async (req, res) => {
 //   const { userId } = req.params;
 //   try {
 //       const totalMessagesSent = await Message.countDocuments({
@@ -70,7 +70,7 @@ app.get('/messages/:userId', async (req, res) => {
 // });
 
 // hold user cookies to keep user logged in
-app.get('/profile', (req,res) => {
+app.get('/api/profile', (req,res) => {
   const token = req.cookies?.token;
   if (token) {
     jwt.verify(token, jwtSecret, {}, (err, userData) => {
@@ -82,13 +82,13 @@ app.get('/profile', (req,res) => {
   }
 });
 
-app.get('/users', async (req, res) => {
+app.get('/api/users', async (req, res) => {
   const users = await User.find({}, {'_id': 1, username:1});
   res.json(users);
 });
 
 // log in current user -- search for username and ensure pass is correct
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const {username, password} = req.body;
     const foundUser = await User.findOne({username});
     if (foundUser) {
@@ -109,7 +109,7 @@ app.post('/login', async (req, res) => {
 });
 
 // log out current user by removing cookies
-app.post('/logout', (req, res) => {
+app.post('/api/logout', (req, res) => {
   wss.clients.forEach(client => {
     client.close();
   });
@@ -117,7 +117,7 @@ app.post('/logout', (req, res) => {
 });
 
 // sign in new users -- add new username and pass
-app.post('/signup', async (req,res) => {
+app.post('/api/signup', async (req,res) => {
     const {username,password} = req.body;
     try {
       const hashedPassword = bcrypt.hashSync(password, bcryptSalt);
