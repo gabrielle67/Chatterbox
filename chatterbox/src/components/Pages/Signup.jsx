@@ -24,7 +24,8 @@ export default function SignupAndLogin(){
             if (error.response && error.response.status === 400 && error.response.data.error) {
                 setIsDuplicateUser(true);
                console.log('duplicate!');
-            } else if (error.response && error.response.status === 404 && error.response.data.error) {
+            } else if ((error.response && error.response.status === 404 && error.response.data.error) || 
+                                        (error.response && error.response.status === 401 && error.response.data.error)) {
                 setIsNotUser(true);
                console.log('user not found!');
             } else {
@@ -94,6 +95,5 @@ export default function SignupAndLogin(){
             </div>
         </form>
     </div>
-    
     )
 }

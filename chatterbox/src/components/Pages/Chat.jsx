@@ -15,6 +15,8 @@ export default function Chat(){
     const [offlineUsers,setOfflineUsers] = useState({});
     const [selectedUserId, setSelectedUserId] = useState(null);
     const {username, id, setId, setUsername} = useContext(UserContext);
+    const [isSelectedOnline, setIsSelectedOnline] = useState(true);
+    const [selectedUsername, setSelectedUsername] = useState(null);
     const [newMessage, setNewMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const messageRef = useRef();
@@ -95,6 +97,7 @@ export default function Chat(){
 
     useEffect(() => {
         if (selectedUserId) {
+
             axios.get('/messages/' + selectedUserId).then(res => {
                 setMessages(res.data);
             })
@@ -104,17 +107,17 @@ export default function Chat(){
     // get list of all users aside from current users
     const onlineUsersNotCurr = {...onlineUsers};
     delete onlineUsersNotCurr[id];
+    delete onlineUsersNotCurr['undefined'];
 
     //avoid displaying duplicate message
     const singleMessage = _.uniqBy(messages, '_id');
 
-
     return (
         <div>
             <div className="flex h-screen">
-                <LeftPanel username={username} setWs={setWs} setId={setId} setUsername={setUsername} />
-                <ContactPanel onlineUsersNotCurr={onlineUsersNotCurr} selectedUserId={selectedUserId} setSelectedUserId={setSelectedUserId} offlineUsers={offlineUsers} />
-                <ChatPanel selectedUserId={selectedUserId} singleMessage={singleMessage} messageRef={messageRef} sendMessage={sendMessage} newMessage={newMessage} setNewMessage={setNewMessage} id={id}/>
+                <LeftPanel ws={ws} username={username} setWs={setWs} setId={setId} setUsername={setUsername} id={id}/>
+                <ContactPanel onlineUsersNotCurr={onlineUsersNotCurr} selectedUserId={selectedUserId} setSelectedUserId={setSelectedUserId} offlineUsers={offlineUsers} setSelectedUsername={setSelectedUsername} setIsSelectedOnline={setIsSelectedOnline}/>
+                <ChatPanel selectedUserId={selectedUserId} singleMessage={singleMessage} messageRef={messageRef} sendMessage={sendMessage} newMessage={newMessage} setNewMessage={setNewMessage} id={id} selectedUsername={selectedUsername} isSelectedOnline={isSelectedOnline}/>
             </div>
         </div>
     )

@@ -9,29 +9,70 @@ function logout(setWs, setId, setUsername) {
     });
 }
 
-export function LeftPanel({ username, setWs, setId, setUsername }) {
+// async function totalMsg(userId) {
+//     try {
+//         const response = await axios.get(`/messages/total/${userId}`);
+//         return response.data.totalMessagesSent;
+//     } catch (error) {
+//         console.error('Could not fetch total messages', error);
+//         return 0;
+//     }
+// }
 
+
+export function LeftPanel({ ws, username, setWs, setId, setUsername, id }) {
+    
     const handleLogout = () => {
         logout(setWs, setId, setUsername);
     };
 
-    // TODO stylize guest and logout button
+    // TODO total messages sent
+    // TODO other stats?
 
     return (
         <div className="flex flex-col bg-[#20857c5c]">
             <div className="flex-grow p-2" >
-                <div className="p-2 text-center flex items-center flex-col">
-                    <span className="mr-2 text-sm text-gray-600 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-                        </svg>
-                        {username}
-                    </span>
-                    <button 
-                        onClick={handleLogout} 
-                        className="text-sm bg-blue-100 py-1 px-2 text-gray-500 border rounded-sm">
-                            log out
-                    </button>
+                <div className="p-2 flex items-center flex-col">
+                    <div className="mr-2 text-sm text-gray-300 flex items-center flex-col">
+                        <button className="btn" 
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    border: 'none'}}
+                                onClick={()=>document.getElementById('my_modal_1').showModal()}>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </div>
+                            </button>
+                            <dialog id="my_modal_1" className="modal">
+                                <div className="modal-box bg-[#051217] w-21">
+                                <form method="dialog">
+                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                                <h3 className="font-bold text-lg">Profile</h3>
+                                <div className="py-4">
+                                    <div className='pb-2'>
+                                        Username: {username}
+                                    </div>
+                                    {/* <div>
+                                        Total Messages Sent: {totalMessagesSent}
+                                    </div> */}
+                                </div>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="btn text-sm bg-[#20857c5c]">
+                                            log out
+                                    </button>
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+                    <div>
+                        Profile
+                    </div>
+                    </div>
                 </div>
             </div>
             <div>

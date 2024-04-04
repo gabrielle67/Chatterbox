@@ -1,11 +1,9 @@
-// TODO Stylize Chats text
-
 import User from "../User";
 
-export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedUserId, offlineUsers }) {
+export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedUserId, offlineUsers, setSelectedUsername, setIsSelectedOnline}) {
     return (
-        <div className="bg-[#dbf0e5c3] w-1/3 flex flex-col">
-                    <div className="text-black font-bold flex gap-2 p-4">
+        <div className="bg-[#dbf0e5c3] w-1/3 flex flex-col ">
+                    <div className="text-[#624818] text-2xl font-bold text-center p-3">
                         Chats
                     </div>
                     <div className="flex-grow">
@@ -15,7 +13,9 @@ export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedU
                             id={userId}
                             online={true}
                             username={onlineUsersNotCurr[userId]}
-                            onClick={() => {setSelectedUserId(userId)}}
+                            onClick={() => {setSelectedUserId(userId), 
+                                            setSelectedUsername(onlineUsersNotCurr[userId]),
+                                            setIsSelectedOnline(true)}}
                             selected={userId === selectedUserId} />
                         ))}
                         {Object.keys(offlineUsers).map(userId => (
@@ -24,7 +24,9 @@ export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedU
                             id={userId}
                             online={false}
                             username={offlineUsers[userId].username}
-                            onClick={() => setSelectedUserId(userId)}
+                            onClick={() => {setSelectedUserId(userId), 
+                                            setSelectedUsername(offlineUsers[userId].username),
+                                            setIsSelectedOnline(false)}}
                             selected={userId === selectedUserId} />
                         ))}
                     </div>

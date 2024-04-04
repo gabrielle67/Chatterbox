@@ -55,6 +55,21 @@ app.get('/messages/:userId', async (req, res) => {
   res.json(messages);
 });
 
+// TODO update readme with new endpoint
+// Retrieve total messages sent by a user
+// app.get('/messages/total/:userId', async (req, res) => {
+//   const { userId } = req.params;
+//   try {
+//       const totalMessagesSent = await Message.countDocuments({
+//           sender: userId
+//       });
+//       res.json({ totalMessagesSent });
+//   } catch (error) {
+//       console.error("Error fetching total messages sent:", error);
+//       res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+
 // hold user cookies to keep user logged in
 app.get('/profile', (req,res) => {
   const token = req.cookies?.token;
@@ -86,6 +101,8 @@ app.post('/login', async (req, res) => {
                 id: foundUser._id
                 });
             });
+        } else {
+          res.status(401).json({ error: 'Incorrect password' });
         }
     } else {
       res.status(404).json({ error: 'User not found' });
@@ -94,6 +111,9 @@ app.post('/login', async (req, res) => {
 
 // log out current user by removing cookies
 app.post('/logout', (req, res) => {
+  wss.clients.forEach(client => {
+    client.close();
+  });
   res.cookie('token', '', {sameSite:'none', secure:true}).json('ok');
 });
 
@@ -191,14 +211,6 @@ wss.on('connection', (connection, req) => {
     }
   });
 
-  [...wss.clients].forEach(client => {
-      client.send(JSON.stringify({
-          online: [...wss.clients].map(c => ({userId:c.userId,username:c.username}))}
-      ));
-  })
+  notifyAboutOnlineUsers();
 })
-
-wss.on('close', () => {
-  console.log('disconnected', data);
-});
 

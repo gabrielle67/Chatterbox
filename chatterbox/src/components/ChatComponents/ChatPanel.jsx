@@ -1,10 +1,22 @@
+// TODO add source code link
 
+export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessage, newMessage, setNewMessage, id, selectedUsername, isSelectedOnline }) {
 
-export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessage, newMessage, setNewMessage, id }) {
+    const status = isSelectedOnline === true ? 'online' : 'offline';
     return(
         <div className="flex flex-col w-2/3">
-                <div className="bg-[#dbf0e5c3] flex-row p-4">test</div>
-                    <div className="flex-grow p-2 bg-blue-50">
+                <div className="bg-[#dbf0e5c3] flex-row p-2">
+                    <div className="text-black flex-col">
+                        <div>
+                            {selectedUsername}
+                        </div>
+                        
+                        <div className="text-xs italic">
+                            {selectedUsername !== null ? status : ''}
+                        </div>
+                    </div>
+                </div>
+                    <div className="flex-grow p-2 bg-blue-100">
                         {!selectedUserId && (
                             <div className="flex h-full flex-grow items-center justify-center">
                                 <div className="text-gray-400"> &larr; Select a user </div>
@@ -26,7 +38,7 @@ export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessa
                         )}
                     </div>
                     {!!selectedUserId &&
-                        <form className="flex gap-2 p-2  bg-blue-50" onSubmit={sendMessage}>
+                        <form className="flex gap-2 p-2 text-black bg-blue-100" onSubmit={sendMessage}>
                             <input type="text" 
                                 value={newMessage}
                                 onChange={ev => setNewMessage(ev.target.value)}
