@@ -29,12 +29,14 @@ export default function Chat(){
         const ws = new WebSocket('ws://localhost:4000');
         setWs(ws);
         ws.addEventListener('message', handleMessage);
-        ws.addEventListener('close', () => {
-            setTimeout(() => {
-                console.log('Disconnected. Trying to reconnect');
-                connectToWS();
-            }, 1000);
-        });
+        ws.addEventListener('close', handleWebSocketClose);
+
+        return () => {
+            ws.removeEventListener('message', handleMessage);
+            ws.removeEventListener('close', handleWebSocketClose);
+    
+            ws.close();
+        };
     }
 
     function showOnline(userArray) {
@@ -43,6 +45,13 @@ export default function Chat(){
             users[userId] = username;
         });
         setOnlineUsers(users);
+    }
+
+    function handleWebSocketClose() {
+        setTimeout(() => {
+            console.log('Disconnected. Trying to reconnect');
+            connectToWS();
+        }, 1000);
     }
 
     function handleMessage(e) {
