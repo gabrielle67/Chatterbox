@@ -54,7 +54,7 @@ Install client dependencies
   npm install
 ```
 
-Start the server
+Start the client
 
 ```bash
   npm run dev
