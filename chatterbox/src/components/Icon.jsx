@@ -1,5 +1,8 @@
+// 
 // display user icon and online indicator
-export default function Icon({userId, username, online}) {
+//
+
+export default function Icon({ userId, username, online }) {
   // blue, aqua, purple, pink, yellow, brown, salmon, beige, purple
     const colors = ['bg-[#749de3]',
                     'bg-[#7fc2cb]', 'bg-[#846BB1]',

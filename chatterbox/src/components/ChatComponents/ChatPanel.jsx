@@ -1,5 +1,3 @@
-// TODO add source code link
-
 export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessage, newMessage, setNewMessage, id, selectedUsername, isSelectedOnline }) {
 
     const status = isSelectedOnline === true ? 'online' : 'offline';

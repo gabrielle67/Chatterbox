@@ -7,7 +7,7 @@ import { ChatPanel } from "../ChatComponents/ChatPanel";
 import axios from "axios";
 import _ from "lodash";
 
-//TODO fix messaging issue
+//TODO fix look into React timeout
 
 export default function Chat(){
     const [ws, setWs] = useState(null);

@@ -55,7 +55,6 @@ app.get('/messages/:userId', async (req, res) => {
   res.json(messages);
 });
 
-// TODO update readme with new endpoint
 // Retrieve total messages sent by a user
 // app.get('/messages/total/:userId', async (req, res) => {
 //   const { userId } = req.params;

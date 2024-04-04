@@ -1,11 +1,12 @@
 import User from "../User";
 
-export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedUserId, offlineUsers, setSelectedUsername, setIsSelectedOnline}) {
+export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedUserId, offlineUsers, setSelectedUsername, setIsSelectedOnline }) {
     return (
         <div className="bg-[#dbf0e5c3] w-1/3 flex flex-col ">
                     <div className="text-[#624818] text-2xl font-bold text-center p-3">
                         Chats
                     </div>
+                    <div className="overflow-y-scroll">
                     <div className="flex-grow">
                         {Object.keys(onlineUsersNotCurr).map(userId => (
                             <User
@@ -30,7 +31,6 @@ export function ContactPanel ({ onlineUsersNotCurr, selectedUserId, setSelectedU
                             selected={userId === selectedUserId} />
                         ))}
                     </div>
-                    <div className="p-2 text-center flex items-center flex-col">
                     </div>
                 </div>
     )

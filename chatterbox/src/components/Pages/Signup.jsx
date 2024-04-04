@@ -72,7 +72,7 @@ export default function SignupAndLogin(){
                         <button 
                         onClick={()=> {
                             setUsername("Guest");
-                            setPassword("GuestPassword!");
+                            setPassword("GuestPassword");
                         }}
                         className="bg-blue-500 text-white block w-full rounded-lg p-2">
                             Use Demo Credentials

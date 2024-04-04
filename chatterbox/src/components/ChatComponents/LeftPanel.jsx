@@ -26,9 +26,6 @@ export function LeftPanel({ ws, username, setWs, setId, setUsername, id }) {
         logout(setWs, setId, setUsername);
     };
 
-    // TODO total messages sent
-    // TODO other stats?
-
     return (
         <div className="flex flex-col bg-[#20857c5c]">
             <div className="flex-grow p-2" >

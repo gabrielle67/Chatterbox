@@ -1,6 +1,6 @@
 import Icon from "./Icon";
 
-export default function User({id, username, onClick, selected, online}) {
+export default function User({ id, username, onClick, selected, online }) {
     return (
       <div key={id} onClick={() => onClick(id)}
            className={"border-b border-gray-100 flex items-center gap-2 cursor-pointer "+(selected ? 'bg-blue-50' : '')}>
