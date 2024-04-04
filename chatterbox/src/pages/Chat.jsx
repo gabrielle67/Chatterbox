@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState, useRef } from "react"
-import { LeftPanel } from "../ChatComponents/LeftPanel";
-import { UserContext } from "../UserContext";
-import { ContactPanel } from "../ChatComponents/ContactPanel";
-import { ChatPanel } from "../ChatComponents/ChatPanel";
+import { UserContext } from "../context/UserContext";
+import { ContactPanel } from "../components/chatPanels/ContactPanel";
+import { LeftPanel } from "../components/chatPanels/LeftPanel";
+import { ChatPanel } from "../components/chatPanels/ChatPanel";
  // import { connectToWS, sendMessage } from "./Axios";
 import axios from "axios";
 import _ from "lodash";
@@ -23,7 +23,7 @@ export default function Chat(){
 
     useEffect(() => {
         connectToWS();
-    }, []);
+    }, [selectedUserId]);
 
     function connectToWS() {
         const ws = new WebSocket('ws://localhost:4000');
@@ -67,7 +67,7 @@ export default function Chat(){
     }
 
     function sendMessage(e) {
-        e.preventDefault();
+        if (e) e.preventDefault();
         console.log('message sent');
         ws.send(JSON.stringify({
             recipient: selectedUserId,
@@ -106,7 +106,7 @@ export default function Chat(){
 
     useEffect(() => {
         if (selectedUserId) {
-
+            console.log(selectedUserId);
             axios.get('/messages/' + selectedUserId).then(res => {
                 setMessages(res.data);
             })

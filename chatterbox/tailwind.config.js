@@ -2,9 +2,10 @@
 export default {
   content: [
     "./src/*.jsx",
+    "./src/pages/*.jsx",
+    "./src/context/*.jsx",
     "./src/components/*.jsx",
-    "./src/components/pages/*.jsx",
-    "./src/components/ChatComponents/*.jsx"
+    "./src/components/chatPanels/*.jsx"
   ],
   theme: {
     extend: {},
