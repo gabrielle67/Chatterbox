@@ -63,6 +63,10 @@ To run this project, you will need to add the following environment variables to
 
 `CLIENT_URL`
 
+And the following variables to your client folder
+
+`VITE_API_BASE_URL`
+
 ## API Reference
 
 | Endpoint          | Method | Description                                 | Request Body                           | Response                    |
