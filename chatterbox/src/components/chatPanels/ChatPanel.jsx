@@ -1,4 +1,4 @@
-export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessage, newMessage, setNewMessage, id, selectedUsername, isSelectedOnline }) {
+export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessage, newMessage, setNewMessage, id, selectedUsername, isSelectedOnline, username }) {
 
     const status = isSelectedOnline === true ? 'online' : 'offline';
     return(
@@ -6,11 +6,11 @@ export function ChatPanel({ selectedUserId, singleMessage, messageRef, sendMessa
                 <div className="bg-[#dbf0e5c3] flex-row p-2">
                     <div className="text-black flex-col">
                         <div>
-                            {selectedUsername}
+                            {selectedUsername !== null ? selectedUsername : <div className="text-black">Welcome, {username}!</div>}
                         </div>
                         
                         <div className="text-xs italic">
-                            {selectedUsername !== null ? status : ''}
+                            {selectedUsername !== null ? status : 'you are online'}
                         </div>
                     </div>
                 </div>

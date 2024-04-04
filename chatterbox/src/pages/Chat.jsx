@@ -126,7 +126,7 @@ export default function Chat(){
             <div className="flex h-screen">
                 <LeftPanel ws={ws} username={username} setWs={setWs} setId={setId} setUsername={setUsername} id={id}/>
                 <ContactPanel onlineUsersNotCurr={onlineUsersNotCurr} selectedUserId={selectedUserId} setSelectedUserId={setSelectedUserId} offlineUsers={offlineUsers} setSelectedUsername={setSelectedUsername} setIsSelectedOnline={setIsSelectedOnline}/>
-                <ChatPanel selectedUserId={selectedUserId} singleMessage={singleMessage} messageRef={messageRef} sendMessage={sendMessage} newMessage={newMessage} setNewMessage={setNewMessage} id={id} selectedUsername={selectedUsername} isSelectedOnline={isSelectedOnline}/>
+                <ChatPanel selectedUserId={selectedUserId} singleMessage={singleMessage} messageRef={messageRef} sendMessage={sendMessage} newMessage={newMessage} setNewMessage={setNewMessage} id={id} selectedUsername={selectedUsername} isSelectedOnline={isSelectedOnline} username={username}/>
             </div>
         </div>
     )
