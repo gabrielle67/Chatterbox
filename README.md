@@ -14,6 +14,13 @@ A Full Stack Chatting App using Websocket for real time communication and MongoD
 **Other Tools & Technologies:** Tailwind, Vercel
 
 
+## Demo 
+
+https://chatterboxapp.vercel.app/
+
+Please note that the demo does not include real-time messaging because WebSockets are not supported by Vercel
+
+To use real-time messaging and see online users, please run the application locally
 
 
 ## Run Locally
@@ -81,6 +88,7 @@ And the following variables to your client folder
 
 ## Future Goals 
 
-* Friending Capability
-* Group Chat capability
-* More stylized UI
+* more stylized UI
+* make mobile-friendly
+* add the ability to send files and images
+* add group chat/friending capability
